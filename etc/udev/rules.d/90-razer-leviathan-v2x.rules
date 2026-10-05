@@ -1,0 +1,7 @@
+# Razer Leviathan V2 X (1532:054a): firmware attenuates far more than its USB
+# descriptor claims, and boots at ~16% hardware volume (near silent).
+# Pin the hardware volume whenever the card appears (boot, replug, resume).
+# Controls are looked up by NAME, not numid (numids change between kernels).
+SUBSYSTEM=="sound", KERNEL=="card[0-9]*", ATTRS{idVendor}=="1532", ATTRS{idProduct}=="054a", \
+  RUN+="/usr/bin/amixer -c %n cset name='PCM Playback Volume' 100", \
+  RUN+="/usr/bin/amixer -c %n cset name='PCM Playback Switch' on"
