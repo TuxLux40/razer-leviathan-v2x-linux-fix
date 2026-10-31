@@ -11,7 +11,7 @@ Needs `alsa-utils` (amixer) and PipeWire/WirePlumber 0.5+.
 ## Why
 The firmware attenuates far more than its USB descriptor claims and boots at
 ~16% hardware volume, so hw-volume-driven mixers produce near silence.
-- `90-razer-leviathan-v2x.rules` sets the hw volume to 100/151 whenever the card appears.
+- `90-razer-leviathan-v2x.rules` sets the hw volume to 100/151 whenever the card appears (both `PCM Playback Volume` controls; kernel 7.3 added a second one, index=1).
 - `51-leviathan-v2x-soft-mixer.conf` makes PipeWire use software volume (`api.alsa.soft-mixer`).
 
 Controls are matched by name, not numid (numids changed in kernel 7.1.2).

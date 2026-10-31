@@ -2,6 +2,10 @@
 # descriptor claims, and boots at ~16% hardware volume (near silent).
 # Pin the hardware volume whenever the card appears (boot, replug, resume).
 # Controls are looked up by NAME, not numid (numids change between kernels).
+# Kernel 7.3 exposes a second 'PCM Playback Volume' (index=1); a name-only
+# match hits index 0 only, so pin both. The index=1 call is a harmless no-op
+# on kernels without it.
 SUBSYSTEM=="sound", KERNEL=="card[0-9]*", ATTRS{idVendor}=="1532", ATTRS{idProduct}=="054a", \
   RUN+="/usr/bin/amixer -c %n cset name='PCM Playback Volume' 100", \
+  RUN+="/usr/bin/amixer -c %n cset name='PCM Playback Volume',index=1 100", \
   RUN+="/usr/bin/amixer -c %n cset name='PCM Playback Switch' on"
